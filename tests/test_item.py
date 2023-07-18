@@ -24,3 +24,11 @@ def test_apply_discount(item):
 
 def test_string_to_number():
     assert Item.string_to_number('5.0') == 5
+
+
+def test_repr(item):
+    assert repr(item) == 'Item("Test Item", 10, 5)'
+
+
+def test_str(item):
+    assert str(item) == "Test Item"
