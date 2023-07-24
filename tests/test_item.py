@@ -32,3 +32,10 @@ def test_repr(item):
 
 def test_str(item):
     assert str(item) == "Test Item"
+
+
+def test_add():
+    item1 = Item("Смартфон", 10000, 20)
+    item2 = Item("Телефон", 5000, 10)
+    assert (item1 + item2) == 30
+    assert (item1 + 10000) == None
