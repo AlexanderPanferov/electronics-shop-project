@@ -27,7 +27,7 @@ def test_string_to_number():
 
 
 def test_repr(item):
-    assert repr(item) == 'Item("Test Item", 10, 5)'
+    assert repr(item) == "Item('Test Item', 10, 5)"
 
 
 def test_str(item):

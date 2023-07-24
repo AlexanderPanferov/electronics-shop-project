@@ -59,8 +59,8 @@ class Item:
         with open('../src/items.csv', encoding='CP1251') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                name = row['name']
-                price = int(row['price'])
+                name = str(row['name'])
+                price = float(row['price'])
                 quantity = int(row['quantity'])
                 cls(name, price, quantity)
 
