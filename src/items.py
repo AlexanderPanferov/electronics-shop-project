@@ -55,10 +55,10 @@ class Item:
         self.price *= self.pay_rate
 
     @classmethod
-    def instantiate_from_csv(cls):
+    def instantiate_from_csv(cls, filename):
         cls.all.clear()
         try:
-            with open('../items.csv', encoding='CP1251') as f:
+            with open(filename, encoding='CP1251') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
                     if list(row.keys()) == ['name', 'price', 'quantity']:
