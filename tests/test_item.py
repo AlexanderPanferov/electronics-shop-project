@@ -39,3 +39,11 @@ def test_add():
     item2 = Item("Телефон", 5000, 10)
     assert (item1 + item2) == 30
     assert (item1 + 10000) == None
+
+
+def test_instantiate_from_csv_FileNotFoundError():
+    assert Item.instantiate_from_csv('test3.csv') == 'Отсутствует файл items.csv'
+
+
+def test_instantiate_from_csv_InstantiateCSVError():
+    assert Item.instantiate_from_csv('test4.csv') == 'Файл items.csv поврежден'
