@@ -61,12 +61,17 @@ class Item:
             with open('../items.csv', encoding='CP1251') as f:
                 reader = csv.DictReader(f)
                 for row in reader:
-                    name = str(row['name'])
-                    price = float(row['price'])
-                    quantity = int(row['quantity'])
-                    cls(name, price, quantity)
+                    if list(row.keys()) == ['name', 'price', 'quantity']:
+                        name = str(row['name'])
+                        price = float(row['price'])
+                        quantity = int(row['quantity'])
+                        cls(name, price, quantity)
+                    else:
+                        raise InstantiateCSVError
         except FileNotFoundError:
             print('Отсутствует файл items.csv')
+        except InstantiateCSVError as err:
+            print(err.message)
 
     @staticmethod
     def string_to_number(number):
@@ -77,3 +82,11 @@ class Item:
         if isinstance(other, self.__class__):
             return self.quantity + other.quantity
         return None
+
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        if len(args) > 0:
+            self.message = args[0]
+        else:
+            self.message = 'Файл items.csv поврежден'
