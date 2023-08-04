@@ -1,5 +1,5 @@
 import pytest
-from src.items import Item
+from src.items import Item, InstantiateCSVError
 
 
 @pytest.fixture
@@ -42,8 +42,10 @@ def test_add():
 
 
 def test_instantiate_from_csv_FileNotFoundError():
-    assert Item.instantiate_from_csv('test3.csv') == 'Отсутствует файл items.csv'
+    with pytest.raises(FileNotFoundError, match='Отсутствует файл items.csv'):
+        Item.instantiate_from_csv('missing_file')
 
 
 def test_instantiate_from_csv_InstantiateCSVError():
-    assert Item.instantiate_from_csv('test4.csv') == 'Файл items.csv поврежден'
+    with pytest.raises(InstantiateCSVError, match='Файл items.csv поврежден'):
+        Item.instantiate_from_csv('corrupted_file.csv')
